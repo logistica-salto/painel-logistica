@@ -119,6 +119,141 @@
     main { padding: 16px 14px; }
   }
 
+
+  /* ============================================
+     MOBILE RESPONSIVO — COMPLETO
+     Breakpoint principal: 768px
+  ============================================ */
+  @media (max-width: 768px) {
+
+    /* ── Header ── */
+    .header-top { padding: 10px 14px; }
+    .brand-icon { width: 38px; height: 38px; border-radius: 9px; }
+    .brand-name .sub-word, .brand-name .main-word { font-size: 13px; letter-spacing: 2px; }
+    .brand-sub { font-size: 8px; letter-spacing: 3px; }
+    .header-actions { gap: 6px; flex-wrap: wrap; }
+    .header-actions button, .header-actions span { font-size: 11px; padding: 5px 8px; }
+    #loggedName { display: none; }
+    #userBar { font-size: 11px; }
+
+    /* ── Nav tabs ── */
+    .nav-tabs-wrap { overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch; }
+    .nav-tab { font-size: 11px; padding: 10px 12px; }
+
+    /* ── Toolbar ── */
+    .toolbar { padding: 10px 14px; gap: 8px; flex-wrap: wrap; }
+    .toolbar .mes-nav button { padding: 6px 12px; font-size: 15px; }
+    .toolbar .mes-nav span { font-size: 12px; min-width: 120px; }
+
+    /* ── Main content ── */
+    main { padding: 12px 10px; max-width: 100%; }
+
+    /* ── Home grid — 2 colunas no mobile ── */
+    .home-grid { grid-template-columns: 1fr 1fr !important; gap: 10px !important; }
+    .home-card { padding: 14px 10px; }
+    .home-card-icon { font-size: 28px; }
+    .home-card-title { font-size: 12px; }
+
+    /* ── KPI cards — 2 colunas ── */
+    .rec-grid { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+    .aj-grid  { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+    #vencKpis { grid-template-columns: 1fr 1fr !important; gap: 10px; }
+    #depKpiGeral > div { grid-template-columns: repeat(3,1fr) !important; }
+
+    /* ── Gráficos — 1 coluna ── */
+    .charts-row, .gauge-row,
+    [style*="grid-template-columns:1fr 1fr"],
+    [style*="grid-template-columns: 1fr 1fr"] {
+      grid-template-columns: 1fr !important;
+    }
+    .chart-card { margin-bottom: 14px; }
+    .chart-wrap { height: 200px !important; }
+
+    /* ── Tabelas — scroll horizontal ── */
+    .rec-table-wrap, .aj-table, table {
+      display: block; overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    .aj-table td, .aj-table th,
+    .rec-table td, .rec-table th {
+      font-size: 11px; padding: 7px 8px;
+    }
+
+    /* ── Formulários — 1 coluna ── */
+    .rec-form-grid { grid-template-columns: 1fr !important; }
+    .rec-form { padding: 14px; }
+    .rec-field input, .rec-field select, .rec-field textarea {
+      font-size: 16px !important; /* evita zoom automático no iOS */
+    }
+
+    /* ── Acuracidade — tabela de edição ── */
+    #acuFormTabela { display: block; overflow-x: auto; white-space: nowrap; }
+    #acuFormTabela input { width: 56px !important; font-size: 12px; }
+
+    /* ── Inventário ── */
+    #invSubTabs { flex-direction: column; gap: 0; }
+    #invSubTabs .nav-tab { font-size: 12px; }
+    .inv-grid { grid-template-columns: repeat(6, 40px) !important; gap: 3px !important; }
+    .inv-pos { width: 40px !important; height: 40px !important; font-size: 8px !important; }
+
+    /* ── Depósitos Transitórios ── */
+    .dep-card { min-width: 0; }
+    #depGrid { grid-template-columns: 1fr !important; }
+
+    /* ── Filtros de vencidos ── */
+    #vencFiltroMat { min-width: 100% !important; }
+    #vencFiltroDep, #vencFiltroOrdem { min-width: calc(50% - 6px) !important; }
+
+    /* ── Botões de ação ── */
+    .upload-btn, .ocup-save-btn { font-size: 12px; padding: 7px 12px; }
+
+    /* ── Login ── */
+    .login-box { width: 92vw; padding: 28px 20px; }
+
+    /* ── Sync status ── */
+    #syncStatus { font-size: 10px; padding: 4px 10px; }
+
+    /* ── Seção de abas de recebimento ── */
+    #recSubTabs button { font-size: 10px; padding: 8px 10px; }
+
+    /* ── Cards de depósito compactos ── */
+    .dep-sub-card { padding: 8px 10px; }
+    .dep-card-total { font-size: 18px; }
+
+    /* ── Ocupação geral ── */
+    .ocup-charts-row { grid-template-columns: 1fr !important; }
+    .og-gauge-row { grid-template-columns: 1fr !important; }
+  }
+
+  /* Breakpoint extra pequeno: 480px */
+  @media (max-width: 480px) {
+    .home-grid { grid-template-columns: 1fr 1fr !important; }
+    .rec-grid  { grid-template-columns: 1fr 1fr !important; }
+    #vencKpis  { grid-template-columns: 1fr !important; }
+    .header-top { padding: 8px 10px; }
+    main { padding: 10px 8px; }
+    .nav-tab { font-size: 10px; padding: 8px 8px; }
+    .chart-wrap { height: 180px !important; }
+    .inv-grid { grid-template-columns: repeat(5, 36px) !important; gap: 2px !important; }
+    .inv-pos { width: 36px !important; height: 36px !important; font-size: 7px !important; }
+    .brand-name .sub-word, .brand-name .main-word { font-size: 11px; letter-spacing: 1px; }
+  }
+
+  /* Botões header mobile */
+  @media (max-width: 480px) {
+    .btn-txt-desktop { display: none !important; }
+    .btn-txt-mobile  { display: inline !important; }
+  }
+
+  /* Touch — aumentar áreas clicáveis */
+  @media (hover: none) and (pointer: coarse) {
+    .nav-tab, button, .inv-pos, select, input[type="checkbox"] {
+      min-height: 40px;
+    }
+    .inv-pos { min-height: 36px; }
+  }
+
   /* ===== TELA DE LOGIN ===== */
   #loginOverlay {
     position: fixed; inset: 0; z-index: 9999;
@@ -786,8 +921,8 @@ function preCarregarFirebase(callback){
     <div class="header-right">
       <div id="userBar" style="display:flex;align-items:center;gap:8px;">
         <span id="loggedName" style="font-size:12px;color:#1a7a5c;font-weight:600;"></span>
-        <button onclick="switchHome()" style="font-size:11px;padding:3px 12px;border:1px solid #1a7a5c;border-radius:12px;background:#1a7a5c;color:#fff;cursor:pointer;font-weight:600;">🏠 Painel Inicial</button>
-        <button id="btnGerenciarUsuarios" onclick="usersAbrirModal()" style="display:none;font-size:11px;padding:3px 12px;border:1px solid #1a5c8a;border-radius:12px;background:#fff;color:#1a5c8a;cursor:pointer;font-weight:600;">👥 Usuários</button>
+        <button onclick="switchHome()" style="font-size:11px;padding:3px 12px;border:1px solid #1a7a5c;border-radius:12px;background:#1a7a5c;color:#fff;cursor:pointer;font-weight:600;"><span class="btn-txt-desktop">🏠 Painel Inicial</span><span class="btn-txt-mobile" style="display:none;">🏠</span></button>
+        <button id="btnGerenciarUsuarios" onclick="usersAbrirModal()" style="display:none;font-size:11px;padding:3px 12px;border:1px solid #1a5c8a;border-radius:12px;background:#fff;color:#1a5c8a;cursor:pointer;font-weight:600;"><span class="btn-txt-desktop">👥 Usuários</span><span class="btn-txt-mobile" style="display:none;">👥</span></button>
         <button onclick="doLogout()" style="font-size:11px;padding:3px 10px;border:1px solid #aaa;border-radius:12px;background:#fff;color:#888;cursor:pointer;font-weight:500;">Sair</button>
       </div>
       <span id="lastUpdate" style="font-size:12px; color:#5a6a7a;">Última atualização: —</span>
