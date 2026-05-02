@@ -3194,6 +3194,7 @@ function invLoadContadas(dep, ano, mes){
 }
 function invSaveContadas(dep, ano, mes, contadas){
   try{ localStorage.setItem(invKeyContadas(dep,ano,mes), JSON.stringify(contadas)); }catch(e){}
+  syncSet(invKeyContadas(dep,ano,mes), contadas);
 }
 
 // ---- Carregar/salvar adicionadas (permanente) ----
@@ -4675,6 +4676,60 @@ function acuLoadFromStorage(){
     fbListen('aj_problemas', function(v){ if(v){ try{ localStorage.setItem('aj_problemas',JSON.stringify(v)); }catch(e){} if(typeof ajCarregarProblemas==='function') ajCarregarProblemas(); }});
     fbListen('aj_fornecedores', function(v){ if(v){ try{ localStorage.setItem('aj_fornecedores',JSON.stringify(v)); }catch(e){} }});
     fbListen('aj_compradores', function(v){ if(v){ try{ localStorage.setItem('aj_compradores',JSON.stringify(v)); }catch(e){} }});
+
+    // ── Ocupação Geral — listeners de capacidade e dados mensais ──
+    ogSyncFromFirebase();
+    fbListen('ogCap_bob', function(v){ if(v!==null&&v!==undefined){ try{localStorage.setItem('ogCap_bob',String(v));}catch(e){} ogLoadCap(); if(typeof ogRender==='function') ogRender(); showSyncStatus('🔄 Ocupação atualizada'); }});
+    fbListen('ogCap_pp',  function(v){ if(v!==null&&v!==undefined){ try{localStorage.setItem('ogCap_pp',String(v));}catch(e){} ogLoadCap(); if(typeof ogRender==='function') ogRender(); }});
+
+    // ── Recebimento — listeners de todos os tipos do ano atual ──
+    recSyncFromFirebase();
+
+    // ── Inventário — listeners de contadas, adicionadas e excluídas ──
+    (function(){
+      var ano = new Date().getFullYear();
+      ['SMA','SPA'].forEach(function(dep){
+        for(var m=0;m<12;m++){
+          (function(d,a,mes){
+            var k = 'inv_contadas_'+d+'_'+a+'_'+mes;
+            fbListen(k, function(v){ if(v){ try{localStorage.setItem(k,JSON.stringify(v));}catch(e){} if(typeof invRender==='function') invRender(); showSyncStatus('🔄 Inventário atualizado'); }});
+          })(dep,ano,m);
+        }
+        var kAdd = 'inv_add_'+dep;
+        var kDel = 'inv_del_'+dep;
+        fbListen(kAdd, function(v){ if(v){ try{localStorage.setItem(kAdd,JSON.stringify(v));}catch(e){} if(typeof invRender==='function') invRender(); }});
+        fbListen(kDel, function(v){ if(v){ try{localStorage.setItem(kDel,JSON.stringify(v));}catch(e){} if(typeof invRender==='function') invRender(); }});
+      });
+    })();
+
+    // ── Consumo da Produção — listeners de todos os meses do ano ──
+    (function(){
+      var ano = new Date().getFullYear();
+      for(var m=0;m<12;m++){
+        (function(a,mes){
+          var kP = 'cons_prev_'+a+'_'+mes;
+          var kR = 'cons_real_'+a+'_'+mes;
+          fbListen(kP, function(v){ if(v){ try{localStorage.setItem(kP,JSON.stringify(v));}catch(e){} if(typeof consRender==='function') consRender(); showSyncStatus('🔄 Consumo atualizado'); }});
+          fbListen(kR, function(v){ if(v){ try{localStorage.setItem(kR,JSON.stringify(v));}catch(e){} if(typeof consRender==='function') consRender(); }});
+        })(ano,m);
+      }
+    })();
+
+    // ── Recebimento vs Produção — listeners do comparativo ──
+    (function(){
+      var ano = new Date().getFullYear();
+      for(var m=0;m<12;m++){
+        (function(a,mes){
+          var kP = 'rec_prev_'+a+'_'+mes;
+          var kR = 'rec_real_'+a+'_'+mes;
+          fbListen(kP, function(v){ if(v){ try{localStorage.setItem(kP,JSON.stringify(v));}catch(e){} if(typeof compRender==='function') compRender(); }});
+          fbListen(kR, function(v){ if(v){ try{localStorage.setItem(kR,JSON.stringify(v));}catch(e){} if(typeof compRender==='function') compRender(); showSyncStatus('🔄 Comparativo atualizado'); }});
+        })(ano,m);
+      }
+    })();
+
+    // ── Depósitos Transitórios — listener do histórico ──
+    fbListen('dep_trans_historico', function(v){ if(v){ try{localStorage.setItem('dep_trans_historico',JSON.stringify(v));}catch(e){} showSyncStatus('🔄 Depósitos atualizados'); if(typeof depRender==='function') depRender(); }});
   });
 }
 // ===== FIM FORMULÁRIO ACURACIDADE =====
