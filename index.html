@@ -7371,7 +7371,7 @@ function vencRender(registro){
     var border = ativo ? '1.5px solid #c62828' : '1px solid #f0f2f5';
     var badgeBg = ativo ? '#c62828' : '#f0f2f5';
     var badgeColor = ativo ? '#fff' : '#888';
-    return '<div onclick="vencFiltrarUMB(''+u+'')" '
+    return '<div data-umb="'+u+'" onclick="vencFiltrarUMB(this.dataset.umb)" '
       +'style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;padding:4px 6px;'
       +'border-bottom:'+border+';border-radius:5px;background:'+bg+';cursor:pointer;transition:all .15s;"'
       +' title="Filtrar por '+u+'">'
